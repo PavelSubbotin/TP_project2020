@@ -12,25 +12,29 @@ class GameLoop{
         BattleBoard board;
         PrepPhase prep;
         prep.build(board);
+        while (true) {
+            MovePhase move_;
+            std::pair<int, int> acts = move_.make_moves(board);
 
-        MovePhase move_;
-        std::pair<int, int> acts = move_.make_moves(board);
+            AttackPhase attack;
+            attack.attack_phase(board, acts.first, acts.second);
 
-        AttackPhase attack;
-        attack.attack_phase(board, acts.first, acts.second);
+            FinalPhase final_;
+            int winner = final_.final_phase(board);
 
-        FinalPhase final_;
-        int winner = final_.final_phase(board);
-
-        if (winner == 0) {
-            std::cout << "No winner now!" << std::endl;
-        } else if (winner == 1) {
-            std::cout << "First player won!" << std::endl;
-        } else if (winner == -1) {
-            std::cout << "Second player won!" << std::endl;
-        } else {
-            std::cout << "Draw!";
+            if (winner == 0) {
+                std::cout << "No winner now!" << std::endl;
+            } else if (winner == 1) {
+                std::cout << "First player won!" << std::endl;
+                return;
+            } else if (winner == -1) {
+                std::cout << "Second player won!" << std::endl;
+                return;
+            } else {
+                std::cout << "Draw!";
+                return;
+            }
+            board.shuffle_septums();
         }
-        board.shuffle_septums()
     }
 };

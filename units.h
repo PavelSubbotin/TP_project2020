@@ -37,7 +37,6 @@ class Archer : virtual public Unit {
   public:
     ~Archer(){};
     Archer(int health_ = DEFAULT.archer_health, int damage_ = DEFAULT.archer_damage) {
-        std::cout << "huy" << std::endl;
         health = health_;
         damage = damage_;
         type = "Archer";
@@ -114,7 +113,6 @@ class Knight : virtual public Unit {
     }
 
     bool const can_go(int from_x, int from_y, int to_x, int to_y) const override {
-        std::cout << "ya dolbaeb\n";
         int x = abs(from_x - to_x);
         int y = abs(from_y - to_y);
         if (x == 1 && y == 2 || x == 2 && y == 1){
